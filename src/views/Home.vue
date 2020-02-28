@@ -1,18 +1,59 @@
 <template>
-  <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
-  </div>
+  <v-app>
+    <v-row>
+      <v-col class="pa-0">
+        <v-card height="100%" class="overflow-hidden">
+          <v-navigation-drawer absolute dark color="#0066cc" width="300">
+            <v-list dense nav class="py-0 ma-3">
+              <v-list-item two-line :class="miniVariant && 'px-5'">
+                <v-list-item-avatar>
+                  <img src="https://randomuser.me/api/portraits/men/81.jpg" />
+                </v-list-item-avatar>
+
+                <v-list-item-content>
+                  <v-list-item-title>Application</v-list-item-title>
+                  <v-list-item-subtitle>Subtext</v-list-item-subtitle>
+                </v-list-item-content>
+              </v-list-item>
+
+              <v-divider></v-divider>
+
+              <v-list-item v-for="item in items" :key="item.title" link>
+                <v-list-item-icon>
+                  <v-icon>{{ item.icon }}</v-icon>
+                </v-list-item-icon>
+
+                <v-list-item-content>
+                  <v-list-item-title>{{ item.title }}</v-list-item-title>
+                </v-list-item-content>
+              </v-list-item>
+            </v-list>
+          </v-navigation-drawer>
+        </v-card>
+      </v-col>
+
+      
+    </v-row>
+  </v-app>
 </template>
 
 <script>
-// @ is an alias to /src
-import HelloWorld from '@/components/HelloWorld.vue'
-
 export default {
-  name: 'Home',
-  components: {
-    HelloWorld
+  data() {
+    return {
+      items: [
+        { title: "หน้าแรก", icon: "mdi-view-dashboard" },
+        { title: "ยา", icon: "mdi-image" },
+        { title: "อุปกรณ์", icon: "mdi-help-box" }
+      ]
+    };
+  },
+  computed: {
+    bg() {
+      return this.background
+        ? "https://cdn.vuetifyjs.com/images/backgrounds/bg-2.jpg"
+        : undefined;
+    }
   }
-}
+};
 </script>
