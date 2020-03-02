@@ -5,7 +5,7 @@
     aspect-ratio="3"
   >
     <v-app id="inspire">
-      <v-content>
+      <v-content class="font">
         <v-container class="fill-height" fluid>
           <v-row align="center" justify="center">
             <v-col cols="12" sm="6" xl="4">
@@ -37,7 +37,7 @@
                 </v-card-text>
                 <v-card-actions>
                   <v-spacer />
-                  <p>{{messageError}}</p>
+                  <p class="err_text">{{messageError}}</p>
                   <v-spacer />
                   <v-btn color="primary" @click="Login()">Login</v-btn>
                 </v-card-actions>
@@ -76,6 +76,7 @@ export default {
       ).then((res) => {
         console.log(res)
         router.push({ name: "Home" });
+        this.$cookies.set('token', res.data)
       }).catch((err) => {
         this.messageError = 'email หรือ password ไม่ถูกต้อง'
         console.log(err)
@@ -86,12 +87,17 @@ export default {
 </script>
 
 <style>
-p {
+@import url('https://fonts.googleapis.com/css?family=Prompt&display=swap');
+.err_text {
   color: red
 }
 
 #inspire {
   /* background-size: 100%; */
   background: none;
+}
+
+.font {
+  font-family: 'Prompt'
 }
 </style>
