@@ -14,7 +14,7 @@
 
       <v-divider class="py-2"></v-divider>
 
-      <v-list-item link>
+      <v-list-item link @click="Dashbord()">
         <v-icon>dashboard</v-icon>
         <v-list-item-content class="px-3">
           <h4>Dashboard</h4>
@@ -30,13 +30,13 @@
           </v-list-item-content>
         </template>
 
-        <v-list-item link>
+        <v-list-item link @click="Medical()">
           <v-list-item-content class="px-8">
             <h5>ข้อมูลยา</h5>
           </v-list-item-content>
         </v-list-item>
 
-        <v-list-item link>
+        <v-list-item link @click="OrderMedical()">
           <v-list-item-content class="px-8">
             <h5>ข้อมูลการสั่งซื้อยา</h5>
           </v-list-item-content>
@@ -54,27 +54,27 @@
         </template>
 
         <v-list-item link>
-          <v-list-item-content class="px-8">
+          <v-list-item-content class="px-8" @click="Equipment()">
             <h5>ข้อมูลอุปกรณ์</h5>
           </v-list-item-content>
         </v-list-item>
 
         <v-list-item link>
-          <v-list-item-content class="px-8">
+          <v-list-item-content class="px-8" @click="OrderEquipment()">
             <h5>ข้อมูลการสั่งซื้ออุปกรณ์</h5>
           </v-list-item-content>
         </v-list-item>
       </v-list-group>
       <!-- +++++++++++++++++++++++++++++++++++ -->
 
-      <v-list-item link>
+      <v-list-item link @click="PatientInfo()">
         <font-awesome-icon size="lg" icon="clipboard-list" />
         <v-list-item-content class="px-3">
           <h4>ข้อมูลคนไข้</h4>
         </v-list-item-content>
       </v-list-item>
 
-      <v-list-item link>
+      <v-list-item link @click="Schedule()">
         <font-awesome-icon size="lg" icon="table" />
         <v-list-item-content class="px-3">
           <h4>ตารางการนัดหมาย</h4>
@@ -83,14 +83,14 @@
 
       <v-divider class="py-2"></v-divider>
 
-       <v-list-item link>
+      <v-list-item link @click="Setting()">
         <font-awesome-icon size="lg" icon="cog" />
         <v-list-item-content class="px-3">
           <h4>ตั้งค่า</h4>
         </v-list-item-content>
       </v-list-item>
 
-      <v-list-item link>
+      <v-list-item link @click="SettingUser()">
         <font-awesome-icon size="lg" icon="users-cog" />
         <v-list-item-content class="px-3">
           <h4>จัดการผู้ใช้</h4>
@@ -99,10 +99,10 @@
     </v-list>
 
     <template v-slot:append>
-        <div class="pa-2">
-          <v-btn block @click="Logout()">Logout</v-btn>
-        </div>
-      </template>
+      <div class="pa-2">
+        <v-btn block @click="Logout()">Logout</v-btn>
+      </div>
+    </template>
   </v-navigation-drawer>
 </template>
 
@@ -116,7 +116,7 @@ import { faTable } from "@fortawesome/free-solid-svg-icons";
 import { faCog } from "@fortawesome/free-solid-svg-icons";
 import { faUsersCog } from "@fortawesome/free-solid-svg-icons";
 import jwt from "jsonwebtoken";
-import router from '../router'
+import router from "../router";
 export default {
   data() {
     return {
@@ -132,6 +132,7 @@ export default {
 
   mounted() {
     this.decode = jwt.decode(this.token);
+
     library.add(faPills);
     library.add(faSyringe);
     library.add(faClipboardList);
@@ -140,10 +141,37 @@ export default {
     library.add(faUsersCog);
   },
   methods: {
-      Logout() {
-          router.push({ name: "Login" })
-          this.$cookies.remove('token')
-      }
+    Logout() {
+      router.push({ name: "Login" });
+      this.$cookies.remove("token");
+    },
+    Dashbord() {
+      router.push({ name: "Home" });
+    },
+    Medical() {
+      router.push({ name: "Medical" });
+    },
+    OrderMedical() {
+      router.push({ name: "OrderMedical" });
+    },
+    Equipment() {
+      router.push({ name: "Equipment" });
+    },
+    OrderEquipment() {
+      router.push({ name: "OrderEquipment" });
+    },
+    PatientInfo() {
+      router.push({ name: "PatientInfo" });
+    },
+    Schedule() {
+      router.push({ name: "Schedule" });
+    },
+    Setting() {
+      router.push({ name: "Setting" });
+    },
+    SettingUser() {
+      router.push({ name: "SettingUser" });
+    }
   }
 };
 </script>
